@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Template Title</title>
+        <meta name="description" content="Template Title">
+        {% comment %}
+        For bootstrap
+        {% endcomment %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+        
+    </head>
+    <body class="container">
+        {% if messages %}
+        <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="row">
+            <div class="register col">
+                <form action="/register" method="POST">
+                    <h1>Registration</h1>
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="register">
+
+                    <div class="form-group row">
+                        <label for="first_name" class="col-sm-3 col-form-label">First Name</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name" class="col-sm-3 col-form-label">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="birthday" class="col-sm-3 col-form-label">Birthday</label>
+                        <input type="date" name="birthday" id="birthday" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="confirm_pw" class="col-sm-3 col-form-label">Confirm PW</label>
+                        <input type="password" name="confirm_pw" id="confirm_pw" class="form-control col-sm-8">
+                    </div>
+
+                    <button class="btn btn-primary ml-col-sm-2" type="submit">Register</button>
+                </form>
+            </div>
+
+            <div class="login col">
+                <form action="/login" method="POST">
+                    <h1>Login</h1>
+                    {% csrf_token %}
+                    <input type="hidden" name="which_form" value="login">
+
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control col-sm-8">
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control col-sm-8">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
